@@ -1,0 +1,24 @@
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+ exports.up = async function(knex) {
+    await knex.schema.createTable('Assets', table=>{
+        
+        table.increments('assetId').primary();
+        table.string('plant').notNullable();
+        table.string('processArea').notNullable();
+        table.string('asset').notNullable();
+        table.string('rcaId').notNullable();
+        // table.timestamps(true,true);  
+      });
+};
+
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.down = async function(knex) {
+    await knex.schema.dropTable('Assets');
+
+};
