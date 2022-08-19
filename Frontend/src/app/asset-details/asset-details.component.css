@@ -1,0 +1,48 @@
+
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-inner{
+    width: 90vw;
+    display: flex;
+    background-color: aqua;
+}
+
+.title{
+    margin-top: 0%;
+    margin-bottom: 0%;
+    margin-left: 3%;
+    margin-right: 70%;
+    align-items: flex-start;
+    background-color: bisque;
+}
+
+.addAsset{
+    align-items: flex-end;
+    background-color:aquamarine;
+    margin-left: 1rem;
+    padding: 0rem 0rem;
+    border: hidden;
+}
+
+.box{
+    /* border: 0.1rem 5rem; */
+    border: solid;
+    border-color: black;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.container{
+    width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table
+{
+
+}
