@@ -5,10 +5,10 @@
  exports.up = async function(knex) {
     await knex.schema.createTable('Assets', table=>{
         
-        table.increments('assetId').primary();
+        table.increments('assetId');
         table.string('plant').notNullable();
         table.string('processArea').notNullable();
-        table.string('asset').notNullable();
+        table.string('asset').notNullable().primary().unique();
         table.string('rcaId').notNullable();
         // table.timestamps(true,true);  
       });

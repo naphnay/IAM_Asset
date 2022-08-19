@@ -1,29 +1,27 @@
 const assetDao = require('../dao/assetDao')
 class assetService {
 
-    assetList(){
+    assetList(rcaId){
 
-        return assetDao.assetList();
+        return assetDao.assetList(rcaId);
     }
 
     createAsset(assetDto,rcaId){
-        console.log("inside bug service");
         const {plant,processArea,asset} = assetDto;
         
         return assetDao.createAsset(rcaId,plant,processArea,asset);
     
     }
 
-    async updateAsset(assetDetails){
+    async updateAsset(assetDetails){ 
       
-        console.log( "in service   "+ assetDetails.plant);
-        const {assetId,plant,processArea,asset} = assetDetails;
-        return assetDao.updateAsset(assetId,plant,processArea,asset);
+        const {rcaId,assetId,plant,processArea} = assetDetails;
+        return assetDao.updateAsset(rcaId,assetId,plant,processArea);
     }
 
-    deleteAsset(assetId){
+    deleteAsset(rcaId,assetId){
         
-        return assetDao.deleteAsset(assetId);
+        return assetDao.deleteAsset(rcaId,assetId);
     }
 }   
 

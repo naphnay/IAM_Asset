@@ -2,44 +2,73 @@ const { default: knex } = require('knex');
 const db = require('../db/db');
 class assetDao{
 
-    async assetList(){
-        const list = await db('Assets');
-        return list;      
+    async assetList(rcaId){
+        try
+        {
+            const list = await db('Assets').where({rcaId:rcaId});
+            return list;
+        }
+        catch(err)
+        {
+            return "err";
+        }
+              
     }
 
     async createAsset(rcaId,plant,processArea,asset){
-        console.log("inside dao");
-          const [rcaId2] = await db('Assets').insert({
+        try
+        {
+            const [rcaId2] = await db('Assets').insert({
             
-            plant: plant,
-            processArea: processArea,
-            asset: asset,
-            rcaId: rcaId,
-              
-          })
-          .returning('rcaId');
-          const asset2 = [rcaId2,plant,processArea,asset]
-          return asset2;
+                plant: plant,
+                processArea: processArea,
+                asset: asset,
+                rcaId: rcaId,
+                  
+              })
+              .returning('rcaId');
+              const asset2 = [rcaId2,plant,processArea,asset]
+              return asset2;
+        }
+        catch(err)
+        {
+            return "err";
+        }
+          
     }  
 
-    async updateAsset(assetId,plant,processArea,asset){
-        console.log( " inside dao update   "+ assetId + "  "+plant+"  "+processArea+"  "+asset );
+    async updateAsset(rcaId,assetId,plant,processArea){
+        try
+        {   
         const [asset2] = await db('Assets')
-        .where({assetId:assetId})
+        .where({assetId:assetId,rcaId:rcaId})
         .update({
             plant: plant,
             processArea: processArea,
-            asset: asset,
+           
         })
         .returning(['assetId']);
-        console.log( "  in dao update" + asset2 );
         return asset2;
+        }
+        catch(err)
+        {
+            console.log(err);
+            return "err";
+        }
     }
 
-    async deleteAsset(assetId){
-        const asset = await db('Assets').where({assetId:assetId}).del();
-        console.log(asset);
-        return "successfully deleted !!!";      
+    async deleteAsset(rcaId,assetId){
+        try{
+            const asset = await db('Assets').where({assetId:assetId,rcaId:rcaId}).del();
+            console.log("successfully deleted !!!");
+            return "successfully deleted !!!"; 
+        }
+        catch(err)
+        {
+            console.log(err);
+            return "err";
+        }
+             
       }  
 }
 
